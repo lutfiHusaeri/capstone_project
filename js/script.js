@@ -111,17 +111,26 @@ function fetchWeatherData() {
 }
 
 function displayWeather(container, city, data) {
-  const weatherCard = document.createElement('div');
-  weatherCard.classList.add('weather-card');
-
-  const cityName = data.name;
-  const temperature = data.main.temp;
-  const description = data.weather[0].description;
-
-  const weatherHtml = `<h2>${cityName}</h2>
-                       <p>Temperatur: ${temperature}°C</p>
-                       <p>Weater: ${description}</p>`;
-
-  weatherCard.innerHTML = weatherHtml;
-  container.appendChild(weatherCard);
+    const weatherCard = document.createElement('div');
+    weatherCard.classList.add('weather-card');
+  
+    const cityName = data.name;
+    const temperature = data.main.temp;
+    const description = data.weather[0].description;
+    const iconCode = data.weather[0].icon;
+  
+    const iconUrl = `http://openweathermap.org/img/w/${iconCode}.png`;
+  
+    const weatherHtml = `<div class="weather-image">
+                            <img src="${iconUrl}" alt="${description}">
+                         </div>
+                         <div class="weather-info">
+                            <h2>${cityName}</h2>
+                            <p>Temperature: ${temperature}°C</p>
+                            <p>Weather: ${description}</p>
+                         </div>`;
+  
+    weatherCard.innerHTML = weatherHtml;
+    container.appendChild(weatherCard);
 }
+
